@@ -24,7 +24,7 @@ from conda_build.cli.main_render import get_render_parser
 from conda_build.cli.actions import KeyValueAction
 import conda_build.source as source
 from conda_build.utils import LoggingContext
-from conda_build.config import Config, get_channel_urls
+from conda_build.config import Config, compression_tuple_default, get_channel_urls
 from os.path import abspath, expanduser, expandvars
 
 on_win = (sys.platform == 'win32')
@@ -158,6 +158,12 @@ different sets of packages."""
         dest='force_upload',
         default=True,
         action='store_false',
+    )
+    p.add_argument(
+        "--compression-tuple", nargs=3,
+        help=("When building v2 packages, specify the compression arguments "
+              f"used by conda-package-handling. Defaults to {compression_tuple_default}."),
+        default=compression_tuple_default,
     )
     pypi_grp = p.add_argument_group("PyPI upload parameters (twine)")
     pypi_grp.add_argument(

@@ -48,6 +48,7 @@ no_rewrite_stdout_env_default = 'false'
 ignore_verify_codes_default = []
 exit_on_verify_error_default = False
 conda_pkg_format_default = None
+compression_tuple_default = ('.tar.zst', 'zstd', 'zstd:compression-level=22')
 
 
 # Python2 silliness:
@@ -214,7 +215,7 @@ def _get_default_settings():
             Setting('_pip_cache_dir', None),
 
             # set up compression algorithm used in new-style packages
-            Setting('compression_tuple', ('.tar.zst', 'zstd', 'zstd:compression-level=22')),
+            Setting('compression_tuple', compression_tuple_default),
 
             # this can be set to different values (currently only 2 means anything) to use package formats
             Setting('conda_pkg_format', cc_conda_build.get('pkg_format', conda_pkg_format_default)),
